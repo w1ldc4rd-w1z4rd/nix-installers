@@ -12,11 +12,11 @@ Welcome to **\*Nix Installers**! This repository contains a collection of helpfu
 ## Installation Guide
 
 **Debian**
-```
-curl -sSL https://deb.clc.onl | bash
-```
+
+> curl -sSL https://deb.clc.onl | bash
+
 
 **Irssi**
-```
-curl -SSL https://irc.clc.onl | bash
-```
+
+> curl -SSL https://irc.clc.onl | bash
+
