@@ -10,7 +10,7 @@
 # Command Line Collective
 # https://clc.onl
 #
-# Debian Setup
+# Debian 12 Setup
 #
 # By: w1ldc4rd_w1z4rd (2024-06-14)
 #
@@ -332,9 +332,7 @@ CMDS
 
 # ~~~~~~~~~~~~~~~~ INIT
 
-echo $CMDS | perl -Mfeature=try -MTerm::ANSIColor=':constants' -snlE '
-
-    no warnings q|experimental|;
+echo $CMDS | perl -MTerm::ANSIColor=':constants' -snlE '
 
     map
     {
@@ -342,19 +340,17 @@ echo $CMDS | perl -Mfeature=try -MTerm::ANSIColor=':constants' -snlE '
 
         unless ( m~^$|^\#~ )
 	{
-		try
-		{
-			say BOLD GREEN qq|> $_|, RESET;
-			system $_;    
-		}
-		catch ($e)
+		say BOLD GREEN qq|> $_|, RESET;
+		eval { system $_ };    
+		
+		unless ($? == 0)
 		{
 			die BOLD RED qq|> Fail: $e\n|, RESET;
 		}
 	}
     } split ( qr|\n|, $cmds )
 
-' -- -cmds="$CMDS"
+' 
 
 check_fail
 

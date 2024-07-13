@@ -10,7 +10,7 @@
 # Command Line Collective
 # https://clc.onl
 #
-# Irssi Debian Installer
+# Irssi Debian 12 Installer
 #
 # By: w1ldc4rd_w1z4rd (2024-06-12)
 #
@@ -65,18 +65,16 @@ echo $CMDS | perl -Mfeature=try -MTerm::ANSIColor=':constants' -snlE '
     {
         say BOLD GREEN qq|> $_|, RESET;
 
-        try
-        {
-            system $_
-        }
-        catch ($e)
-        {
+        eval { system $_ };
+        
+	unless ($? == 0)
+	{
             die BOLD RED qq|> Fail: $e\n|, RESET;
         }
 
     } split ( qr|\n|, $cmds )
 
-' -- -cmds="$CMDS"
+' 
 
 check_fail
 
